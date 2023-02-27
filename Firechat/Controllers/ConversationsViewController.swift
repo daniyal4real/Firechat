@@ -44,6 +44,7 @@ class ConversationsViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
         setupTableView()
+        fetchConversations()
     }
     
     

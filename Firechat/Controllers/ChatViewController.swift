@@ -48,7 +48,7 @@ class ChatViewController: MessagesViewController {
             sender: selfSender,
             messageId: "1",
             sentDate: Date(),
-            kind: .text("How are you")))
+            kind: .text("Hello world")))
         
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -63,7 +63,11 @@ class ChatViewController: MessagesViewController {
 extension ChatViewController: MessagesDataSource,
                               MessagesLayoutDelegate, MessagesDisplayDelegate {
     var currentSender: SenderType {
-        return selfSender
+//        return selfSender
+        return Sender(
+            photoURL: "any",
+            senderId: "any",
+            displayName: "Frank")
     }
     
 
