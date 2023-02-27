@@ -7,10 +7,13 @@
 
 import UIKit
 import FirebaseAuth
-
+import JGProgressHUD
 
 class RegisterViewController: UIViewController {
 
+    private let spinner = JGProgressHUD(style: .dark)
+    
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "person")
@@ -254,17 +257,37 @@ class RegisterViewController: UIViewController {
             return
         }
         
-        // Firebase login
         
+        //spinner
+        
+        spinner.show(in: view)
+        
+
+        // added after register
+        
+        DatabaseManager.shared.userExists(with: email, completion: { [weak self] exists in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            
+            DispatchQueue.main.async {
+                strongSelf.spinner.dismiss()
+            }
+            
+            guard !exists else {
+                strongSelf.alertUserLoginError(message: "Аккаунт с этим email уже существует")
+                return
+            }
+        
+        
+        // Firebase login
         
         FirebaseAuth.Auth.auth().createUser(
             withEmail: email,
             password: password,
-            completion: { [weak self] authResult, error in
+            completion: { authResult, error in
                 
-                guard let strongSelf = self else {
-                    return
-                }
                 
 //                guard let result = authResult, error == nil else {
 //                    print("Ошибка при регистраций")
@@ -287,17 +310,16 @@ class RegisterViewController: UIViewController {
                 
                 
                 
-                
-                
                 strongSelf.navigationController?.dismiss(
                     animated: true,
                     completion: nil)
             })
+        })
     }
     
-    func alertUserLoginError() {
+    func alertUserLoginError(message: String = "Пожалуйста, введите все данные") {
         let alert = UIAlertController(title: "Ошибка",
-                                      message: "Пожалуйста, введите все данные",
+                                      message: message,
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Отменить", style: .cancel, handler: nil))
         present(alert, animated: true)

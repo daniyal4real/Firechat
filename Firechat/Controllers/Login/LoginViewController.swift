@@ -7,11 +7,15 @@
 
 import UIKit
 import FirebaseAuth
-
+import JGProgressHUD
 
 
 class LoginViewController: UIViewController {
 
+    
+    // added
+    private let spinner = JGProgressHUD(style: .dark)
+    
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -162,6 +166,7 @@ class LoginViewController: UIViewController {
     
     @objc private func loginButtonTapped() {
         
+        
         // dismiss keyboard
         emailField.resignFirstResponder()
         passwordField.resignFirstResponder()
@@ -173,15 +178,33 @@ class LoginViewController: UIViewController {
             return
         }
         
+        
+        
+        
+        // added
+        
+        spinner.show(in: view)
+        
+        
         // Firebase login
         
         FirebaseAuth.Auth.auth().signIn(
             withEmail: email,
             password: password,
             completion: { [weak self] authResult, error in
+                
+                
                 guard let strongSelf = self else {
                     return
                 }
+                
+                
+                // added
+                DispatchQueue.main.async {
+                    strongSelf.spinner.dismiss()
+                }
+                
+                
                 guard let result = authResult, error == nil else{
                     print("Ошибка логин \(email)")
                     return 

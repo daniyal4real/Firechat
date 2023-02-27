@@ -74,12 +74,39 @@
         }
       },
       {
+        "package": "InputBarAccessoryView",
+        "repositoryURL": "https://github.com/nathantannar4/InputBarAccessoryView",
+        "state": {
+          "branch": null,
+          "revision": "039a9cb3ae8c5bc4d39242a6aa688b88023633d3",
+          "version": "6.2.0"
+        }
+      },
+      {
+        "package": "JGProgressHUD",
+        "repositoryURL": "https://github.com/JonasGessner/JGProgressHUD.git",
+        "state": {
+          "branch": null,
+          "revision": "78d7cd35f1d90ff74fd82e486f2cbe4b24be8cf9",
+          "version": "2.2.0"
+        }
+      },
+      {
         "package": "leveldb",
         "repositoryURL": "https://github.com/firebase/leveldb.git",
         "state": {
           "branch": null,
           "revision": "0706abcc6b0bd9cedfbb015ba840e4a780b5159b",
           "version": "1.22.2"
+        }
+      },
+      {
+        "package": "MessageKit",
+        "repositoryURL": "https://github.com/MessageKit/MessageKit",
+        "state": {
+          "branch": null,
+          "revision": "f3f61ebbc9c56533700c2e7b5742682849cc314d",
+          "version": "4.0.0"
         }
       },
       {
@@ -98,6 +125,15 @@
           "branch": null,
           "revision": "ec957ccddbcc710ccc64c9dcbd4c7006fcf8b73a",
           "version": "2.2.0"
+        }
+      },
+      {
+        "package": "SDWebImage",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
+        "state": {
+          "branch": null,
+          "revision": "a812079ae91a7f2e627364c42ea7b98abfa366ed",
+          "version": "5.15.4"
         }
       },
       {
