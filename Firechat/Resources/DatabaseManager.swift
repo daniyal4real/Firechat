@@ -22,7 +22,13 @@ final class DatabaseManager {
     }
     
     
-    
+    static func  safeEmail(emailAddress: String) -> String {
+        var safeEmail = emailAddress.replacingOccurrences(
+            of: ".", with: "-")
+        safeEmail = safeEmail.replacingOccurrences(
+            of: "@", with: "-")
+        return safeEmail
+    }
 
 }
 
@@ -40,6 +46,11 @@ struct ChatAppUser {
             of: "@", with: "-")
         return safeEmail
     }
+    
+    // added images
+    var profilePictureFileName: String {
+        return "\(safeEmail)_profile_picture.png"
+    }
 //    let profilePictureUrl: String
 }
 
@@ -48,12 +59,19 @@ struct ChatAppUser {
 extension DatabaseManager {
     
     
-    public func insertUser(with user: ChatAppUser) {
+    public func insertUser(with user: ChatAppUser, completion: @escaping (Bool) -> Void) {
         print(user.safeEmail)
         database.child(user.safeEmail).setValue([
             "Имя": user.firstName,
             "Фамилия": user.lastName
-        ])
+        ], withCompletionBlock: { error, _ in
+            guard error == nil else {
+                print("Ошибка записи в базу данных")
+                completion(false)
+                return
+            }
+            completion(true)
+        })
     }
     
     

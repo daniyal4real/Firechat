@@ -32,7 +32,6 @@ class ChatViewController: MessagesViewController {
         senderId: "1",
         displayName: "Mike Landin")
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,9 +45,9 @@ class ChatViewController: MessagesViewController {
         
         messages.append(Message(
             sender: selfSender,
-            messageId: "1",
+            messageId: "2",
             sentDate: Date(),
-            kind: .text("Hello world")))
+            kind: .text("How are you?")))
         
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -64,10 +63,7 @@ extension ChatViewController: MessagesDataSource,
                               MessagesLayoutDelegate, MessagesDisplayDelegate {
     var currentSender: SenderType {
 //        return selfSender
-        return Sender(
-            photoURL: "any",
-            senderId: "any",
-            displayName: "Frank")
+        return selfSender
     }
     
 
@@ -75,6 +71,9 @@ extension ChatViewController: MessagesDataSource,
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         return messages[indexPath.section]
     }
+    
+    
+    
     
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
